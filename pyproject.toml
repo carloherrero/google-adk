@@ -1,0 +1,3 @@
+[tool.pytest.ini_options]
+addopts = "--cov=city_briefing_agent --cov-report=term-missing -v"
+testpaths = ["tests"]
