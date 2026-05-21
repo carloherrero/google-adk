@@ -1,0 +1,30 @@
+"""Centralized model selection. Flip LLM_PROVIDER in .env to switch."""
+import os
+from google.adk.models.lite_llm import LiteLlm
+
+def get_model():
+    """Return the model object/string for the configured provider.
+
+    Set LLM_PROVIDER=gemini  -> uses Gemini via Google API key
+    Set LLM_PROVIDER=ollama  -> uses local Ollama (default model: qwen2.5:7b)
+    """
+    provider = os.getenv("LLM_PROVIDER", "gemini").lower()
+    print(f"[model_config] LLM_PROVIDER={provider!r}")
+
+    if provider == "ollama":
+        print(f"I AM IN THE OLLAMA IF CONDITION")
+        model_name = os.getenv("OLLAMA_MODEL", "qwen2.5:7b")
+        api_base = os.getenv("OLLAMA_API_BASE", "http://localhost:11434")
+        # ollama_chat (not ollama) — better tool-calling behavior per ADK docs
+        return LiteLlm(
+            model=f"ollama_chat/{model_name}",
+            api_base=api_base,
+        )
+
+    if provider == "gemini":
+        print(f"I AM IN THE GEMINI IF CONDITION")
+        return os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+
+    raise ValueError(
+        f"Unknown LLM_PROVIDER={provider!r}. Use 'gemini' or 'ollama'."
+    )

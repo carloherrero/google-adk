@@ -1,0 +1,24 @@
+"""Root agent for the city briefing system.
+
+For local models (Ollama), we flatten the architecture by giving the root
+agent direct access to the tool functions. The two-layer "specialist agent"
+pattern works well with Gemini but confuses smaller local models.
+"""
+
+from google.adk.agents import LlmAgent
+from google.adk.models.lite_llm import LiteLlm
+
+from .prompt import ROOT_INSTRUCTION
+from .sub_agents.weather.tools import get_weather
+from .sub_agents.news.tools import get_news
+
+root_agent = LlmAgent(
+    name="city_briefing_bot",
+    model=LiteLlm(model="ollama_chat/qwen2.5:7b"),
+    description=(
+        "A briefing assistant that provides current weather and the latest "
+        "news for any city, topic, or combination thereof."
+    ),
+    instruction=ROOT_INSTRUCTION,
+    tools=[get_weather, get_news],
+)

@@ -1,0 +1,59 @@
+{
+  "eval_set_id": "city_briefing_basic",
+  "name": "City Briefing Basic Smoke Tests",
+  "description": "Smoke tests covering single/multi-city weather, single/multi-topic news, and combined briefings.",
+  "eval_cases": [
+    {
+      "eval_id": "single_city_weather",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [{"text": "What's the weather in London?"}]
+          },
+          "final_response": {
+            "parts": [{"text": "Should mention London, a temperature, and a condition."}]
+          }
+        }
+      ]
+    },
+    {
+      "eval_id": "multi_city_weather",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [{"text": "Compare the weather in Tokyo, Paris, and New York."}]
+          },
+          "final_response": {
+            "parts": [{"text": "Should include all three cities with temperatures and conditions."}]
+          }
+        }
+      ]
+    },
+    {
+      "eval_id": "single_topic_news",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [{"text": "Latest news on AI?"}]
+          },
+          "final_response": {
+            "parts": [{"text": "Should list a few recent AI headlines with sources."}]
+          }
+        }
+      ]
+    },
+    {
+      "eval_id": "combined_briefing",
+      "conversation": [
+        {
+          "user_content": {
+            "parts": [{"text": "Give me a briefing on Tokyo."}]
+          },
+          "final_response": {
+            "parts": [{"text": "Should include both current Tokyo weather and recent Tokyo news."}]
+          }
+        }
+      ]
+    }
+  ]
+}
