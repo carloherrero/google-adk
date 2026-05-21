@@ -1,0 +1,21 @@
+from google.adk.agents import LlmAgent
+
+def get_weather(city: str) -> dict:
+    """Get current weather for a city.
+    
+    Args:
+        city: The name of the city to get weather for.
+    
+    Returns:
+        A dictionary with weather information.
+    """
+    # Mock data for now — swap in a real API later
+    return {"city": city, "temp": "72°F", "condition": "Sunny"}
+
+root_agent = LlmAgent(
+    name="weather_bot",
+    model="gemini-2.5-flash",
+    description="Provides weather information",
+    instruction="Help users get weather info for any city.",
+    tools=[get_weather],
+)
