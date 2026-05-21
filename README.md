@@ -55,14 +55,59 @@ adk web
 - `Give me a briefing on Tokyo` (weather + news)
 - `Briefing on Tokyo, Paris, and São Paulo`
 
+## Testing
+
+The unit tests mock out the HTTP layer, so they run without API keys and don't
+burn your free-tier quota.
+
+1. Install dev dependencies (one-time):
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
+
+2. Run the tests from the workspace root:
+   ```bash
+   pytest
+   ```
+
+   Coverage and verbose output are enabled by default via `pyproject.toml`,
+   so you'll see which lines of `city_briefing_agent/` are exercised.
+
+3. (Optional) Generate an HTML coverage report:
+   ```bash
+   pytest --cov-report=html
+   # then open htmlcov/index.html in a browser
+   ```
+
+### Common test failures
+
+- **`ModuleNotFoundError: No module named 'city_briefing_agent'`** — you're not
+  at the workspace root, or an `__init__.py` is missing. Run `ls` (or `dir`)
+  and confirm you see both `city_briefing_agent/` and `tests/`.
+- **`ModuleNotFoundError: No module named 'google.adk'`** — the venv isn't
+  active, or `pip install -r requirements.txt` hasn't been run in this venv.
+
 ## Project structure
 
 ```
-city_briefing_agent/
-├── agent.py                    # root_agent
-├── prompt.py                   # root instruction
-├── sub_agents/
-│   ├── weather/                # weather specialist + its tool
-│   └── news/                   # news specialist + its tool
-└── eval/                       # ADK eval sets
+your-workspace/
+├── .venv/                       # virtual environment (gitignored)
+├── .env.example                 # template for required API keys
+├── .gitignore
+├── requirements.txt             # runtime dependencies
+├── requirements-dev.txt         # test/dev dependencies
+├── pyproject.toml               # pytest + coverage config
+├── README.md                    # this file
+│
+├── city_briefing_agent/
+│   ├── agent.py                 # root_agent
+│   ├── prompt.py                # root instruction
+│   ├── .env                     # your real API keys (gitignored)
+│   ├── sub_agents/
+│   │   ├── weather/             # weather specialist + its tool
+│   │   └── news/                # news specialist + its tool
+│   └── eval/                    # ADK eval sets
+│
+└── tests/
+    └── test_tools.py            # unit tests (mocked HTTP)
 ```
