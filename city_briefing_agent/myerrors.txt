@@ -1,0 +1,151 @@
+cherrero@LNAR-5CG0338F9B MINGW64 /c/Projects/google-adk (GOOGLE-ADK-B0004)
+$ adk run city_briefing_agent/
+Log setup complete: C:\Users\cherrero\AppData\Local\Temp\agents_log\agent.20260522_100459.log
+To access latest log: tail -F C:\Users\cherrero\AppData\Local\Temp\agents_log\agent.20260522_100459.log
+[model_config] LLM_PROVIDER='gemini' USE_NESTED_AGENTS=True
+C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\cli\cli.py:333: UserWarning: [EXPERIMENTAL] InMemoryCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  credential_service = InMemoryCredentialService()
+C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\auth\credential_service\in_memory_credential_service.py:33: UserWarning: [EXPERIMENTAL] BaseCredentialService: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.
+  super().__init__()
+Running agent city_briefing_bot, type exit to exit.
+[user]: what is the weather in london
+C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\models\llm_request.py:256: UserWarning: [EXPERIMENTAL] feature FeatureName.JSON_SCHEMA_FOR_FUNC_DECL is enabled.
+  declaration = tool._get_declaration()
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Projects\google-adk\.venv\Scripts\adk.exe\__main__.py", line 5, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\click\core.py", line 1161, in __call__
+    return self.main(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\click\core.py", line 1082, in main
+    rv = self.invoke(ctx)
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\click\core.py", line 1697, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\click\core.py", line 1443, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\click\core.py", line 788, in invoke
+    return __callback(*args, **kwargs)
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\cli\cli_tools_click.py", line 124, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\cli\cli_tools_click.py", line 597, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\cli\cli_tools_click.py", line 742, in cli_run
+    asyncio.run(
+    ~~~~~~~~~~~^
+        run_cli(
+        ^^^^^^^^
+    ...<15 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\cherrero\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\cherrero\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\cherrero\AppData\Local\Programs\Python\Python314\Lib\asyncio\base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\cli\cli.py", line 504, in run_cli
+    await run_interactively(
+    ...<8 lines>...
+    )
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\cli\cli.py", line 241, in run_interactively
+    await run_and_print()
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\cli\cli.py", line 230, in run_and_print
+    async for event in agen:
+    ...<3 lines>...
+      _print_event(event, jsonl=jsonl, session_id=session.id)
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\runners.py", line 997, in run_async
+    async for event in agen:
+      yield event
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\runners.py", line 582, in _run_node_async
+    await self._cleanup_root_task(task, self.agent.name)
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\runners.py", line 800, in _cleanup_root_task
+    await task
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\runners.py", line 568, in _drive_root_node
+    raise ctx.error
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 129, in run
+    await self._execute_node(ctx, node_input)
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 248, in _execute_node
+    await self._run_node_loop(ctx, node_input)
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\workflow\_node_runner.py", line 262, in _run_node_loop
+    async for event in agen:
+      self._track_event_in_context(event, ctx)
+      await self._enqueue_event(event, ctx)
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\workflow\_base_node.py", line 216, in run
+    async for item in agen:
+    ...<12 lines>...
+        yield Event(output=validated)
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\agents\llm_agent.py", line 547, in _run_impl
+    async for event in agen:
+    ...<4 lines>...
+      yield event
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\workflow\_llm_agent_wrapper.py", line 380, in run_llm_agent_as_node
+    async for event in run_iter:
+    ...<22 lines>...
+          break
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\agents\base_agent.py", line 279, in run_async
+    async for event in agen:
+      yield event
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\agents\llm_agent.py", line 503, in _run_async_impl
+    async for event in agen:
+    ...<5 lines>...
+        should_pause = True
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 825, in run_async
+    async for event in agen:
+      last_event = event
+      yield event
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 904, in _run_one_step_async
+    async for llm_response in agen:
+    ...<13 lines>...
+          yield event
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 1293, in _call_llm_async
+    async for event in agen:
+      yield event
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 1271, in _call_llm_with_tracing
+    async for llm_response in agen:
+    ...<18 lines>...
+      yield llm_response
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 1354, in _run_and_handle_error
+    async for response in agen:
+      yield response
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 410, in _run_and_handle_error
+    raise model_error
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\flows\llm_flows\base_llm_flow.py", line 383, in _run_and_handle_error
+    async for llm_response in agen:
+    ...<5 lines>...
+      yield llm_response
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\adk\models\google_llm.py", line 272, in generate_content_async
+    response = await self.api_client.aio.models.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\genai\models.py", line 8410, in generate_content
+    return await self._generate_content(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        model=model, contents=contents, config=parsed_config
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Projects\google-adk\.venv\Lib\site-packages\google\genai\models.py", line 6964, in _generate_content
+    response_dict = {} if not response.body else json.loads(response.body)
+                                                 ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\cherrero\AppData\Local\Programs\Python\Python314\Lib\json\__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\cherrero\AppData\Local\Programs\Python\Python314\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cherrero\AppData\Local\Programs\Python\Python314\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+(.venv) 
