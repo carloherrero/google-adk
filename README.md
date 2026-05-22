@@ -15,6 +15,10 @@ The root agent routes queries to one or both specialists. Each specialist's
 tool supports parallel multi-item lookups (e.g. weather for Tokyo + Paris +
 London in one round-trip).
 
+The model layer uses ADK's `LiteLlm` wrapper, which lets you swap between
+Gemini, Claude (Anthropic), and local models (e.g. Ollama) without changing
+any tool code.
+
 ## Setup
 
 1. Create and activate a virtual environment (one level above the agent folder):
@@ -30,8 +34,15 @@ London in one round-trip).
    pip install -r requirements.txt
    ```
 
+   > **Note:** `requirements.txt` pins `google-adk[extensions]`, not just
+   > `google-adk`. The `[extensions]` extra pulls in `litellm`, which is
+   > required for the `LiteLlm` model wrapper used in `agent.py`. Without it
+   > you'll get:
+   > `ImportError: Fail to load 'city_briefing_agent' module. LiteLLM support requires pip install google-adk[extensions]`
+
 3. Copy `.env.example` to `city_briefing_agent/.env` and fill in:
    - Gemini API key from https://aistudio.google.com/app/apikey
+     *(or an Anthropic key — see "Switching models" below)*
    - OpenWeatherMap key from https://home.openweathermap.org/api_keys
    - NewsAPI key from https://newsapi.org/register
 
@@ -54,6 +65,22 @@ adk web
 - `Latest news on AI`
 - `Give me a briefing on Tokyo` (weather + news)
 - `Briefing on Tokyo, Paris, and São Paulo`
+
+## Switching models
+
+All three agent files (`city_briefing_agent/agent.py` and both
+`sub_agents/*/agent.py`) wrap their model in `LiteLlm(...)`. To switch
+providers, change the model string and make sure the matching API key is in
+`city_briefing_agent/.env`:
+
+| Provider       | Model string                                | Env var              |
+|----------------|---------------------------------------------|----------------------|
+| Gemini         | `LiteLlm(model="gemini/gemini-2.5-flash")`  | `GOOGLE_API_KEY`     |
+| Anthropic      | `LiteLlm(model="anthropic/claude-haiku-4-5")` | `ANTHROPIC_API_KEY`  |
+| Ollama (local) | `LiteLlm(model="ollama_chat/qwen2.5:7b")`   | *(none required)*    |
+
+For Ollama, make sure the daemon is running (`ollama serve`) and the model is
+pulled (`ollama pull qwen2.5:7b`) before starting the agent.
 
 ## Testing
 
@@ -79,13 +106,25 @@ burn your free-tier quota.
    # then open htmlcov/index.html in a browser
    ```
 
-### Common test failures
+## Troubleshooting
 
-- **`ModuleNotFoundError: No module named 'city_briefing_agent'`** — you're not
-  at the workspace root, or an `__init__.py` is missing. Run `ls` (or `dir`)
-  and confirm you see both `city_briefing_agent/` and `tests/`.
-- **`ModuleNotFoundError: No module named 'google.adk'`** — the venv isn't
-  active, or `pip install -r requirements.txt` hasn't been run in this venv.
+- **`ImportError: ... LiteLLM support requires pip install google-adk[extensions]`**
+  Your `requirements.txt` is the old version that pinned plain `google-adk`.
+  Update the line to `google-adk[extensions]` and re-run
+  `pip install -r requirements.txt`.
+
+- **`ModuleNotFoundError: No module named 'city_briefing_agent'`**
+  You're not running from the workspace root, or an `__init__.py` is missing.
+  Run `ls` (or `dir` on Windows cmd) and confirm you see both
+  `city_briefing_agent/` and `tests/`.
+
+- **`ModuleNotFoundError: No module named 'google.adk'`**
+  The venv isn't active, or `pip install -r requirements.txt` hasn't been run
+  in this venv. Check with `pip list` and look for `google-adk`.
+
+- **OpenWeather returns 401 on first run**
+  New API keys can take up to an hour to activate. If news works but weather
+  doesn't, wait and retry.
 
 ## Project structure
 
