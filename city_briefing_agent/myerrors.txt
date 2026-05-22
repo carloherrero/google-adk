@@ -149,3 +149,30 @@ Traceback (most recent call last):
     raise JSONDecodeError("Expecting value", s, err.value) from None
 json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 (.venv) 
+
+
+
+
+
+
+cherrero@LNAR-5CG0338F9B MINGW64 /c/Projects/google-adk (GOOGLE-ADK-B0004)
+$ py -c "import requests; r = requests.get('https://generativelanguage.googleapis.com/v1beta/models?key=AIzaSyBtlyd-sNk7z4I-kAp1YqjuqkIfPywJCU8');print('
+STATUS:', r.status_code); print ('FIRST 500 CHARS:'); print(r.text[:500])"
+STATUS: 200
+FIRST 500 CHARS:
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZScaler</title>
+    <style>
+                :root {
+                    --surface-primary: #FFFFFF;
+                    --surface-secondary: #FAFAFA;
+                    --Surface-Brand-Secondary-Light-tint: #E9F4FC;
+                    --Surface-Brand-Primary-Light-tint: #F6FAFE;
+                    --text-primary: #272936;
+
+(.venv) 
